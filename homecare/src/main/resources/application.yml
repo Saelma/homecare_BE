@@ -24,6 +24,8 @@ cloud:
   aws:
     s3:
       bucket: homecare-storage-glassua
+    cloudfront:
+      domain: https://img.jaega-home.store
     region:
       static: ap-northeast-2
     stack:

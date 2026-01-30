@@ -44,20 +44,25 @@ pipeline {
         stage('3. Deploy (배포 및 실행)') {
             steps {
                 sh '''
-                    # 1. 기존 앱 컨테이너가 있다면 삭제
+                    # 기존 컨테이너 정리
                     docker stop homecare-app || true
                     docker rm homecare-app || true
 
-                    # 2. 이미지 빌드 (Dockerfile 경로 확인: ./homecare 폴더 안에 있다면 아래처럼)
+                    # 이미지 빌드
                     docker build -t homecare-app ./homecare
 
-                    # 3. 컨테이너 실행 (호스트 8081 -> 컨테이너 8080 연결)
+                    # 컨테이너 실행 (docker-compose 설정 기반)
                     docker run -d \
                       --name homecare-app \
                       -p 8081:8080 \
                       -e SPRING_DATASOURCE_URL="${DB_URL}" \
                       -e SPRING_DATASOURCE_USERNAME="${DB_USERNAME}" \
                       -e SPRING_DATASOURCE_PASSWORD="${DB_PASSWORD}" \
+                      -e AWS_ACCESS_KEY="${AWS_ACCESS_KEY}" \
+                      -e AWS_SECRET_KEY="${AWS_SECRET_KEY}" \
+                      -e CLOUD_AWS_REGION_STATIC="ap-northeast-2" \
+                      -e CLOUD_AWS_S3_BUCKET="homecare-storage-glassua" \
+                      -e CLOUD_AWS_STACK_AUTO="false" \
                       homecare-app
                 '''
             }

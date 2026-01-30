@@ -80,6 +80,9 @@ dependencies {
 	implementation 'io.grpc:grpc-netty-shaded:1.68.1'
 	implementation 'io.grpc:grpc-protobuf:1.68.1'
 	implementation 'io.grpc:grpc-stub:1.68.1'
+
+	// AWS SDK
+	implementation 'io.awspring.cloud:spring-cloud-starter-aws:2.4.4'
 }
 
 tasks.named('test') {

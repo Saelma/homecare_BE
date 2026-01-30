@@ -15,7 +15,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -65,5 +67,11 @@ public class S3Service {
         imageRepository.save(image);
 
         return storedUrl;
+    }
+
+    public List<String> getUserImages(Long userId) {
+        return imageRepository.findAllByUserId(userId).stream()
+                .map(Image::getStoredUrl) // 저장된 CloudFront URL만 추출
+                .collect(Collectors.toList());
     }
 }

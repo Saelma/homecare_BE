@@ -2,7 +2,7 @@ name: Deploy to Amazon EC2
 
 on:
   push:
-    branches: [ "main" ] # 메인 브랜치에 푸시될 때 작동
+    branches: [ "main", "dev" ] # 메인 브랜치에 푸시될 때 작동
 
 jobs:
   deploy:

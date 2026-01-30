@@ -20,9 +20,9 @@ public class S3ControllerImpl implements S3Controller{
     private final S3Service s3Service;
 
     @Override
-    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file, Long userId) {
         try {
-            String fileUrl = s3Service.uploadFile(file);
+            String fileUrl = s3Service.uploadFile(file, userId);
             return ResponseEntity.ok(fileUrl);
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("파일 업로드 실패");

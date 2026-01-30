@@ -16,5 +16,5 @@ public interface S3Controller {
     @Operation(summary = "AWS S3 이미지 업로드 API", description = "업로드 한 파일을 AWS S3에 이미지를 업로드 합니다.")
     @ApiResponse(responseCode = "200", description = "AWS 이미지 업로드 성공")
     @PostMapping(value = "/upload", consumes = org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file);
+    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file, Long userId);
 }

@@ -38,8 +38,13 @@ public class SwaggerConfig {
                 .url("http://13.125.238.135:8001")
                 .description("Production Server (EC2)");
 
+        // Jenkins 서버용
+        Server jenkinsServer = new Server()
+                .url("http://54.116.47.58:8081")
+                .description("Jenkins Server (EC2)");
+
         return new OpenAPI()
-                .servers(List.of(prodServer, serverLocal))
+                .servers(List.of(prodServer, serverLocal, jenkinsServer))
                 .components(new Components().addSecuritySchemes("bearerAuth", bearerAuth))
                 .addSecurityItem(securityRequirement)
                 .info(info);

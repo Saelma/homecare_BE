@@ -28,12 +28,18 @@ public class SwaggerConfig {
 
         SecurityRequirement securityRequirement = new SecurityRequirement().addList("bearerAuth");
 
+        // 로컬 테스트 용
         Server serverLocal = new Server()
                 .url("http://localhost:8080")
                 .description("for localhost usages");
 
+        // EC2 서버용
+        Server prodServer = new Server()
+                .url("http://13.125.238.135:8001")
+                .description("Production Server (EC2)");
+
         return new OpenAPI()
-                .servers(List.of(serverLocal))
+                .servers(List.of(prodServer, serverLocal))
                 .components(new Components().addSecuritySchemes("bearerAuth", bearerAuth))
                 .addSecurityItem(securityRequirement)
                 .info(info);

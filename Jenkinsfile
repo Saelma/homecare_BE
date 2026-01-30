@@ -21,12 +21,14 @@ pipeline {
 
         stage('2. Build (빌드)') {
             steps {
-                // 실행 권한 부여
-                sh 'chmod +x gradlew'
+            dir('homecare') {
+                    // 실행 권한 부여
+                    sh 'chmod +x gradlew'
 
-                // env.를 붙여서 빌드 시점에 환경 변수 주입
-                // application.yml의 ${AWS_ACCESS_KEY} 등에 값이 들어갑니다.
-                sh "AWS_ACCESS_KEY=${env.AWS_ACCESS_KEY} AWS_SECRET_KEY=${env.AWS_SECRET_KEY} ./gradlew clean build"
+                    // env.를 붙여서 빌드 시점에 환경 변수 주입
+                    // application.yml의 ${AWS_ACCESS_KEY} 등에 값이 들어갑니다.
+                    sh "AWS_ACCESS_KEY=${env.AWS_ACCESS_KEY} AWS_SECRET_KEY=${env.AWS_SECRET_KEY} ./gradlew clean build"
+                }
             }
         }
 

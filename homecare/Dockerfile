@@ -11,11 +11,11 @@ RUN apk add --no-cache \
 WORKDIR /app
 
 # Copy gradle wrapper and build files
-COPY homecare/gradle ./gradle
-COPY homecare/gradlew ./
-COPY homecare/gradle.properties* ./
-COPY homecare/build.gradle ./
-COPY homecare/settings.gradle ./
+COPY gradle ./gradle
+COPY gradlew ./
+# COPY gradle.properties* ./
+COPY build.gradle ./
+COPY settings.gradle ./
 
 # Make gradlew executable
 RUN chmod +x ./gradlew
@@ -24,7 +24,7 @@ RUN chmod +x ./gradlew
 RUN ./gradlew dependencies --no-daemon
 
 # Copy source code
-COPY homecare/src ./src
+COPY src ./src
 
 # Build the application
 RUN ./gradlew bootJar --no-daemon
